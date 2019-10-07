@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -28,6 +30,8 @@ public class AlbumDaoImpl implements AlbumDao {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbc;
+	
+	Logger logger = LoggerFactory.getLogger(AlbumDaoImpl.class);
 
 	@Autowired
 	private DataSource dataSource;
@@ -76,6 +80,7 @@ public class AlbumDaoImpl implements AlbumDao {
 		insertAlbum.updateByNamedParam(paramMap, keyHolder);
 		long id = keyHolder.getKey().longValue();
 		Long idl = new Long(id);
+		logger.info("Primary key generated for inserted Album: "+idl);
 		return idl.intValue();
 	}
 
