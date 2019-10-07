@@ -10,6 +10,7 @@ public class Album implements Serializable {
 	private long singerId;
 	private String title;
 	private Date releaseDate;
+	private Singer singer;
 
 	protected Album() {
 		super();
@@ -53,6 +54,14 @@ public class Album implements Serializable {
 
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+
+	public Singer getSinger() {
+		return singer;
+	}
+
+	public void setSinger(Singer singer) {
+		this.singer = singer;
 	}
 
 }

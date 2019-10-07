@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
@@ -24,5 +25,15 @@ public class DBConfiguration {
 		singerDao.setDataSource(ds);
 		return singerDao;
 	}
+
+	@Bean
+	public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate(DataSource ds) {
+		return new NamedParameterJdbcTemplate(ds);
+	}
+
+	/*
+	 * @Bean public AlbumDao getAlbumDao(DataSource ds) { AlbumDao albumDao = new
+	 * AlbumDaoImpl(); albumDao.setDataSource(ds); return albumDao; }
+	 */
 
 }
