@@ -23,5 +23,7 @@ public interface SingerDao {
 	int update(Singer singer);
 
 	int delete(Singer singer);
+	
+	List<Singer> findAllWithAlbums();
 
 }

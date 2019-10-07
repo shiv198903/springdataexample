@@ -85,5 +85,18 @@ public class SingerDaoTest {
 		Singer singer = singerList.get(0);
 		assertTrue(singerDao.delete(singer) == 1);
 	}
+	
+	@Test
+	public void testFindAllWithAlbums() {
+		Singer selectedSinger = null;
+		
+		List<Singer> singerList = singerDao.findAllWithAlbums();
+		for(Singer singer : singerList) {
+			if(singer.getLastName().equalsIgnoreCase("Mayer")) {
+				selectedSinger = singer;
+			}
+		}
+		assertTrue(selectedSinger != null && selectedSinger.getAlbums().get(0).getTitle().equalsIgnoreCase("the search for everything"));
+	}
 
 }
