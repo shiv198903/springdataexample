@@ -31,9 +31,4 @@ public class DBConfiguration {
 		return new NamedParameterJdbcTemplate(ds);
 	}
 
-	/*
-	 * @Bean public AlbumDao getAlbumDao(DataSource ds) { AlbumDao albumDao = new
-	 * AlbumDaoImpl(); albumDao.setDataSource(ds); return albumDao; }
-	 */
-
 }
