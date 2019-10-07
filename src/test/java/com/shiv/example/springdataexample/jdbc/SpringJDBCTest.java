@@ -1,9 +1,15 @@
 package com.shiv.example.springdataexample.jdbc;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,13 +28,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SpringJDBCTest {
 
 	@Autowired
-	private DataSource dataSource;
+	private SingerDao singerDao;
 
-	@Test
-	public void test01() {
+	@BeforeClass
+	/*
+	 * Tagging it with @BeforeClass as we do not want to
+	 * test of the data source i not created.
+	 */
+	public static void test01() {
 		GenericApplicationContext ctx = new AnnotationConfigApplicationContext(DBConfiguration.class);
-		DataSource dataSource = ctx.getBean("dataSource",DataSource.class);
-		assertNotNull(dataSource);
+		DataSource ds = ctx.getBean("dataSource",DataSource.class);
+		assertNotNull(ds);
+		ctx.close();
 	}
 
 }

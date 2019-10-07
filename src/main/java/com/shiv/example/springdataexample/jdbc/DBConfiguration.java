@@ -11,11 +11,18 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 @Configuration
 @ComponentScan(basePackages = "com.shiv.example.springdataexample.jdbc")
 public class DBConfiguration {
-	
+
 	@Bean(name = "dataSource")
 	public DataSource getEmbeddedDS() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScripts("classpath:db/schema.sql",
-				"classpath:db/test-data.sql").build();
+		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
+				.addScripts("classpath:db/schema.sql", "classpath:db/test-data.sql").build();
+	}
+
+	@Bean
+	public SingerDao getSingerDao(DataSource ds) {
+		SingerDao singerDao = new SingerDaoImpl();
+		singerDao.setDataSource(ds);
+		return singerDao;
 	}
 
 }
