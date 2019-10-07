@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -25,6 +27,9 @@ public class AlbumDaoImpl implements AlbumDao {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbc;
 	
+	@Autowired
+	private DataSource dataSource;
+	
 	@Override
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
 		jdbc = jdbcTemplate;
@@ -32,7 +37,8 @@ public class AlbumDaoImpl implements AlbumDao {
 	
 	@Override
 	public List<Album> findAll() {
-		return jdbc.query("SELECT ID, TITLE, RELEASE_DATE,SINGER_ID FROM ALBUM", new AlbumRowMapper());
+		FindAllAlbums findAllAlbums = new FindAllAlbums(dataSource);
+		return findAllAlbums.execute();
 	}
 
 	@SuppressWarnings("serial")
