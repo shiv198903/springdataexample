@@ -76,11 +76,11 @@ public class AlbumDaoImplTest {
 		List<Album> albums = albumDao.findAllWithSingers();
 		Album selectedAlbum = null;
 		for (Album album : albums) {
-			if (album.getTitle().equalsIgnoreCase("From The Cradle")) {
+			if (album.getTitle().equalsIgnoreCase("The Search For Everything")) {
 				selectedAlbum = album;
 			}
 		}
-		assertTrue(selectedAlbum != null && selectedAlbum.getSinger().getFirstName().equalsIgnoreCase("Eric"));
+		assertTrue(selectedAlbum != null && selectedAlbum.getSinger().getFirstName().equalsIgnoreCase("John"));
 	}
 
 }
